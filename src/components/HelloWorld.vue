@@ -2,6 +2,8 @@
   <div class="hello">
     <h1>Demo</h1>
     <div>{{ double }}</div>
+    <div>{{ `${x}` }}</div>
+    <div>{{ `${y}` }}</div>
     <div>
       <button @click="countUp">+</button>
     </div>
@@ -10,7 +12,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import useIncremental from '../composition/useIncremental'
+import useIncremental from '@/composition/useIncremental'
+import useMouse from '@/composition/useMouse'
 
 export default Vue.extend({
   name: 'HelloWorld',
@@ -21,6 +24,7 @@ export default Vue.extend({
   },
   setup(props, ctx) {
     const { count, double } = useIncremental(props.msg)
+    const { x, y } = useMouse()
 
     const countUp = () => {
       count.value++
@@ -28,7 +32,9 @@ export default Vue.extend({
 
     return {
       double,
-      countUp
+      countUp,
+      x,
+      y
     }
   }
 })
